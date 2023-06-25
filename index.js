@@ -1,7 +1,8 @@
 const express = require('express');
-const { copyFileSync } = require('fs');
+const fileSystem = require('fs').promises;
 const app = express();
 const path = require('path');
+const AllBicycleData = require('./data/data.json');
 
 
 const PORT = process.env.PORT || 3000;
@@ -11,13 +12,16 @@ const PORT = process.env.PORT || 3000;
 app.get('/',(req,res) =>{
 
     console.log('Everything is fine now ');
-    return res.send('<h1>Hey How are you ? </h1>');
+    return res.send(AllBicycleData);
 });
 
 app.get('/bicycle' , (req,res) =>{
-    console.log('This is the Bicycle page');
-    console.log(req.query.id);
-    res.send('<h1> Bicycle page </h1>');
+    
+    const bicycleShow = AllBicycleData.find(data =>{
+        return data.id === req.query.id
+    });
+
+    res.send(bicycleShow);
 });
 
 
