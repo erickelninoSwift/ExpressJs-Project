@@ -25,7 +25,11 @@ app.get('/bicycle' , (req,res) =>{
     const bicycleShow = AllBicycleData.find(data =>{
         return data.id === req.query.id
     });
-    return res.render('overview',req.query);
+    console.log(bicycleShow);
+    
+    return res.render('overview',{
+        myBicycle : bicycleShow
+    });
 });
 
 
