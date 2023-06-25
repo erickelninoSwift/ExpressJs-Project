@@ -4,24 +4,22 @@ const app = express();
 const path = require('path');
 const AllBicycleData = require('./data/data.json');
 
-
 const PORT = process.env.PORT || 3000;
 
 
 
-app.get('/',(req,res) =>{
+app.set('view engine','ejs');
 
-    console.log('Everything is fine now ');
-    return res.send(AllBicycleData);
+app.get('/',(req,res) =>{
+    return res.render('bicycles');
 });
 
 app.get('/bicycle' , (req,res) =>{
-    
+
     const bicycleShow = AllBicycleData.find(data =>{
         return data.id === req.query.id
     });
-
-    res.send(bicycleShow);
+    return res.render('overview');
 });
 
 
