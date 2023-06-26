@@ -16,8 +16,13 @@ app.use(express.static('public'));
 
 
 app.get('/', (req,res) =>{
+    const cycle = AllBicycleData;
+
+    console.log(cycle);
     
-    return res.render('bicycles');
+    return res.render('bicycles',{
+        myBicycle : cycle
+    });
 });
 
 app.get('/bicycle' , (req,res) =>{
@@ -26,7 +31,7 @@ app.get('/bicycle' , (req,res) =>{
         return data.id === req.query.id
     });
     console.log(bicycleShow);
-    
+
     return res.render('overview',{
         myBicycle : bicycleShow
     });
